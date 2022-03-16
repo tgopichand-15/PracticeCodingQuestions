@@ -1,0 +1,48 @@
+public class MyClass {
+    
+     public Character[] replaceSpacesInString(Character[] Input,int size){
+     if(size<=0){
+	   return Input;
+	 }
+	 
+	 int spacesCount=0;
+	 for(int i=0;i<size;i++){
+	   if(Input[i]==' '){
+	      spacesCount++;
+	   }
+	 }
+	 
+	 int outputSize=size+(spacesCount*3);
+	 Character[] output=new Character[outputSize];
+	 
+	 int outputFilledSize=0;
+	 for(int j=0;j<size;j++){
+		 if(input[i]!=' '){
+			 output[outputFilledSize]=input[i];
+			 outputFilledSize++;
+		 }
+		 else{
+			 output[outputFilledSize]='%';
+			 output[outputFilledSize+1]='2';
+			 output[outputFilledSize+2]='0';
+			 outputFilledSize+=3;
+		 }
+	 }
+	 
+	 return output;
+  }
+    public static void main(String args[]) {
+      character[] c=new Character[4];
+      c[0]='M';
+      c[1]='y';
+      c[2]=' ';
+      c[3]='g';
+    }
+    
+    MyClass m=new MyClass();
+   m.replaceSpacesInString(c,4);
+}
+
+
+IN_FNSNAC_REQ
+IN_FNSNAC_RES
