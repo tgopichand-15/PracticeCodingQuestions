@@ -1,49 +1,75 @@
 package Arrays;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0, its entire row and 
 column are set to 0. */
 public class Makezeros {
 	
-	public int[][] makeZeros(int[][] input,int rows,int columns,int[][] output){
-		if(rows==0 || columns==0) {
-			return output;
+	private void makeColZeros(int i,int rows,int columns,int[][] input) {
+		for(int k=0;k<rows;k++) {
+			input[k][i]=0;
 		}
+	}
+		
+		
+
+	private void makeRowZeros(int i,int rows,int columns,int[][] input) {
+		for(int m=0;m<columns;m++) {
+			input[i][m]=0;
+		}
+	}
+	
+	public int[][] makeZeros(int[][] input,int rows,int columns){
+		if(rows==0 || columns==0) {
+			return input;
+		}
+
 		
 		
 		int size=rows+columns;
-		Integer[] rowColZeroIndexes=new Integer[size];
+		int colStartIndex=size-rows;
+		int[] rowColZeroIndexes=new int[size];
 		
-		
-		
+		//making columns zero
+		for(int i=0;i<rows;i++) {
+			for(int j=0;j<columns;j++) {
+				if(input[i][j]==0) {
+					rowColZeroIndexes[i]=0;
+					rowColZeroIndexes[colStartIndex+j]=0;
+				}
+				else{
+					rowColZeroIndexes[i]=1;
+					rowColZeroIndexes[colStartIndex+j]=1;
+				}
+			}
+		}
+
+		//[0 1 0 1 0 0]
+		for(int i=0;i<size;i++) {
+			if(rowColZeroIndexes[i]==0 && i<rows) {
+				makeRowZeros(i,rows,columns,input);
+			}
+			
+			if(rowColZeroIndexes[i]==0 && i>rows) {
+				makeColZeros(i-colStartIndex,rows,columns,input);
+			}
+			
 	
-		int colSizeStarting=size-rows;
-	    for(int i=0;i<rows;i++) {
-	    	
-	    	for(int j=0;j<columns;j++) {
-	    		
-	    		if(input[i][j]==0) {
-	    		    rowColZeroIndexes[i]=0;	
-	    		    rowColZeroIndexes[colSizeStarting]=0;
-	    		}
-	    		
-	    		else {
-	    			
-	    		}
-	    		}
-	    		
-	    	}
-	    	
-	    }
-		
-		return output;
+		}
+		return input;
 	}
 	
-	row1,column1
+	public static void main(String[] args) {
+		
+		MakeZeros m=new MakeZeros();
+		
+		
+	}
+	
 	
 	
 	
 
 }
+
+	
+
