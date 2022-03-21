@@ -3,71 +3,99 @@ package Arrays;
 /*Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0, its entire row and 
 column are set to 0. */
 public class Makezeros {
-	
+	int[][] output=new int[4][4];
+
 	private void makeColZeros(int i,int rows,int columns,int[][] input) {
 		for(int k=0;k<rows;k++) {
 			input[k][i]=0;
 		}
+
+		
 	}
-		
-		
+
+
 
 	private void makeRowZeros(int i,int rows,int columns,int[][] input) {
 		for(int m=0;m<columns;m++) {
 			input[i][m]=0;
 		}
+
 	}
-	
+
 	public int[][] makeZeros(int[][] input,int rows,int columns){
+		System.out.println("rows are "+rows);
+		System.out.println("columns are "+columns);
 		if(rows==0 || columns==0) {
 			return input;
 		}
 
-		
-		
+
+
 		int size=rows+columns;
-		int colStartIndex=size-rows;
-		int[] rowColZeroIndexes=new int[size];
-		
+		int colStartIndex=0;
+		int[] rowZeroIndexes=new int[rows];
+		int[] colZeroIndexes=new int[columns];
+
 		//making columns zero
 		for(int i=0;i<rows;i++) {
 			for(int j=0;j<columns;j++) {
+				System.out.println("i is "+i);
+				System.out.println("j is "+j);
 				if(input[i][j]==0) {
-					rowColZeroIndexes[i]=0;
-					rowColZeroIndexes[colStartIndex+j]=0;
+					System.out.println("inside if condition");
+					rowZeroIndexes[i]=-1;
+					colZeroIndexes[j]=-1;
 				}
 				else{
-					rowColZeroIndexes[i]=1;
-					rowColZeroIndexes[colStartIndex+j]=1;
+					if(rowZeroIndexes[i]!=-1) {
+						rowZeroIndexes[i]=1;
+					}
+
+					if(colZeroIndexes[j]!=-1) {
+						colZeroIndexes[j]=1;
+					}
+
 				}
+			}
+		}
+	
+
+		for(int i=0;i<rows;i++) {
+			if(rowZeroIndexes[i]==-1 && i<rows) {
+				makeRowZeros(i,rows,columns,input);
+			}
+		}
+		for(int j=0;j<columns;j++) {
+
+			if(colZeroIndexes[j]==-1 && j<columns) {
+				makeColZeros(j,rows,columns,input);
 			}
 		}
 
-		//[0 1 0 1 0 0]
-		for(int i=0;i<size;i++) {
-			if(rowColZeroIndexes[i]==0 && i<rows) {
-				makeRowZeros(i,rows,columns,input);
-			}
-			
-			if(rowColZeroIndexes[i]==0 && i>rows) {
-				makeColZeros(i-colStartIndex,rows,columns,input);
-			}
-			
-	
-		}
+
 		return input;
 	}
-	
+
 	public static void main(String[] args) {
-		
-		MakeZeros m=new MakeZeros();
-		
-		
+
+		Makezeros m=new Makezeros();
+		int[][] input={ {1, 2, 0,4}, {5, 6, 7,8},{9,10,11,12},{13,14,15,16}};
+		int[][] output=new int[4][4];
+		output=m.makeZeros(input, 4, 4);
+
+		for(int i=0;i<4;i++) {
+			for(int j=0;j<4;j++) {
+				System.out.print(output[i][j]);
+				System.out.print("");
+			}
+			System.out.println("");
+		}
+
 	}
-	
-	
-	
-	
+
+
+
+
 
 }
 
