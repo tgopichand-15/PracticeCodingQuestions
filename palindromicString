@@ -1,0 +1,54 @@
+package Arrays;
+
+import java.util.HashMap;
+
+/*Palindrome Permutation: Given a string, write a function to check if it is a permutation of a palindrome. A palindrome is a word or phrase that is the same forwards and backwards. A permutation 
+is a rearrangement of letters. The palindrome does not need to be limited to just dictionary words*/
+
+public class PalindromicPermutation {
+
+	public boolean palindromicPermutation(String Input) {
+
+		if(Input==null) {
+			return false;
+		}
+
+		HashMap<Character,Integer> hm=new HashMap<>();
+		for(int i=0;i<Input.length();i++) {
+			if(!hm.containsKey(Input.charAt(i))) {
+				hm.put(Input.charAt(i), 1);
+			}
+			else {
+				hm.put(Input.charAt(i), hm.get(Input.charAt(i))+1);
+			}
+
+		}
+
+		//for palindrome making sure that each letter is multiple of 2 and does not contain more than 1 character whose frequency is single
+		int singleCount=0;
+		System.out.println(hm.keySet());
+		for(Character key:hm.keySet()) {
+			System.out.println("key is "+key);
+			if(hm.get(key)==1) {
+				singleCount++;
+			}
+			else {
+				if(hm.get(key)%2!=0) {
+					return false;
+				}
+			}
+		}
+		if(singleCount<=1) {
+			return true;
+		}
+		return false;
+
+	}
+
+
+	public static void main(String[] args) {
+		PalindromicPermutation p=new PalindromicPermutation();
+		System.out.println(p.palindromicPermutation("teste"));
+	}
+
+}
