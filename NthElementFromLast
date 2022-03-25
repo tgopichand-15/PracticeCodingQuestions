@@ -1,0 +1,47 @@
+package LinkedLists;
+
+public class NthElementFromLast {
+	
+	public Node returnNthElementFromLast(Node head,int n) {
+		if(head==null) {
+			return null;
+		}
+		
+//		1->2->3->4->5->6->7
+		int parsedCount=1;
+		int linkedListSize=0;
+		int tempCount=0;
+		
+		//finding size of Linked list
+		Node temp=head;
+		while(temp!=null) {
+			linkedListSize++;
+			temp=temp.next;
+		}
+		
+		if(n>linkedListSize) {
+			return null;
+		}
+		
+		//finding the index of the required element and returning that element
+		int requiredIndex=linkedListSize-n+1;
+		Node temp1=head;
+		while(temp1!=null) {
+			tempCount++;
+			if(tempCount==requiredIndex) {
+				return temp1;
+			}
+			temp1=temp1.next;
+		}
+		
+		return null;
+		
+	}
+	
+	public static void main(String[] args) {
+		NthElementFromLast n=new NthElementFromLast();
+		//n.returnNthElementFromLast(head);
+		
+	}
+
+}
