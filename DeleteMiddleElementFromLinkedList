@@ -1,0 +1,51 @@
+package LinkedLists;
+
+public class DeleteMiddleElement {
+	
+	public Node deleteMiddleElememtFromLinkedList(Node head,int size) {
+		
+		if(head==null) {
+			return null;
+		}
+		
+		int middleElementIndex=size%2==0?size:size+1;
+		int count=0;
+		
+		Node temp=head;
+		Node prev=head;
+		Node curr=null;
+		while(temp!=null) {
+			count++;
+			if(count==middleElementIndex) {
+				prev.next=curr.next;
+			}
+			prev=temp;
+			temp=temp.next;
+			curr=temp;
+		}
+		
+		return head;
+		
+	}
+	
+	public int findLengthOfLinkedList(Node head) {
+		if(head==null) {
+			return 0;
+		}
+		
+		int lengthOfLinkedList=0;
+		Node temp=head;
+		while(temp!=null) {
+			lengthOfLinkedList++;
+			temp=temp.next;
+		}
+		
+		return lengthOfLinkedList;
+	}
+	
+	public static void main(String[] args) {
+		DeleteMiddleElement d=new DeleteMiddleElement();
+		//d.deleteMiddleElememtFromLinkedList(head, d.findLengthOfLinkedList(head));
+	}
+
+}
