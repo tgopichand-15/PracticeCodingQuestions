@@ -1,0 +1,67 @@
+package LinkedLists;
+
+import java.util.HashMap;
+
+/* Write code to remove duplicates from an unsorted linked list. 
+FOLLOW UP 
+How would you solve this problem if a temporary buffer is not allowed? 
+*/
+
+class Node{
+	int data;
+	Node prev;
+	Node next;
+	public Node(int data) {
+		this.data=data;
+	}
+}
+
+//1->2->1->1->2->3->1
+public class RemoveDuplicatesFromLInkedList {
+	
+	public Node removeDuplicatesInLinkedList(Node head) {
+		if(head==null) {
+			return null;
+		}
+		
+		HashMap<Integer,Integer> hm=new HashMap<>();
+		
+		Node temp=head;
+		Node prev=head;
+		Node curr=head;
+		Node next=head;
+		Node temp1;
+		while(temp!=null) {
+			prev=temp;
+			temp1=temp.next;
+			while(temp1!=null) {
+				curr=temp1;
+				if(temp.data==temp1.data) {
+			      prev.next=curr.next;
+					
+				}
+				else {
+					prev=temp1;
+				}
+				temp1=temp1.next;
+			}
+			prev=temp;
+			temp=temp.next;
+		}
+		return head;
+		
+	}
+	
+	public static void main(String[] args) {
+		RemoveDuplicatesFromLInkedList r=new RemoveDuplicatesFromLInkedList();
+		Node temp=r.removeDuplicatesInLinkedList(null);
+		
+		while(temp!=null) {
+			System.out.println(temp.data);
+			temp=temp.next;
+		}
+	}
+
+}
+
+
