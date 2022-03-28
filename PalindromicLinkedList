@@ -1,0 +1,36 @@
+package LinkedLists;
+
+import java.util.Stack;
+
+public class PalindromicLinkedList {
+	
+	public boolean checkPalindromicLinkedList(Node head) {
+		if(head==null) {
+			return false;
+		}
+		
+		Stack<Character> s=new Stack<Character>();
+		Node temp=head;
+		
+		while(temp!=null) {
+			s.push((char) temp.data);
+			temp=temp.next;
+		}
+		
+		Node temp1=head;
+		while(temp1!=null && s.size()>=0) {
+			if((char)temp1.data!=s.pop()) {
+				return false;
+			}
+			temp1=temp1.next;
+		}
+		return true;
+		
+	}
+	
+	public static void main(String[] args) {
+		PalindromicLinkedList p=new PalindromicLinkedList();
+		//p.checkPalindromicLinkedList(head);
+	}
+
+}
