@@ -1,0 +1,84 @@
+package LinkedLists;
+
+import java.util.Stack;
+
+public class SumOfLinkedLists {
+	
+	public Node sumOfTwoLinkedLists(Node head,Node head1) {
+		if(head==null && head1==null) {
+			return null;
+		}
+		
+		Stack<Integer> firstLinkedList = new Stack<Integer>();
+		Node temp=head;
+		while(temp!=null) {
+			firstLinkedList.push(temp.data);
+			temp=temp.next;
+		}
+		
+		Stack<Integer> secondLinkedList = new Stack<Integer>();
+		Node temp1=head;
+		while(temp1!=null) {
+			firstLinkedList.push(temp1.data);
+			temp1=temp1.next;
+		}
+		
+		
+		Node tempHead=null;
+		Node prev=null;
+		//1->2->5   6->7->8
+	int carry=0,tempSum,sum=0;
+		while(firstLinkedList.size()>=0 || secondLinkedList.size()>=0) {
+			//need to update this here if size is zero index not found exception will be raised
+			if(firstLinkedList.size()>=0) {
+				sum=sum+firstLinkedList.pop();
+			}
+			
+			if(secondLinkedList.size()>=0) {
+				sum=sum+secondLinkedList.pop();
+			}
+			
+			if(carry>0) {
+				sum=sum+carry;
+			}
+			
+			if(sum>9) {
+				tempSum=sum%10;
+				carry=sum/10;
+				if(prev==null) {
+					tempHead.data=tempSum;
+					tempHead.next=null;
+					prev.next=tempHead;
+				}
+				else{
+					prev.data=tempSum;
+					prev.next=null;
+				}
+			
+			}
+			else {
+
+				if(prev==null) {
+					tempHead.data=sum;
+					tempHead.next=null;
+					prev.next=tempHead;
+				}
+				else{
+					prev.data=sum;
+					prev.next=null;
+				}
+			}
+			
+		}
+		
+		return prev;
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		SumOfLinkedLists s=new SumOfLinkedLists();
+		//s.sumOfTwoLinkedLists(head, head1);
+	}
+
+}
